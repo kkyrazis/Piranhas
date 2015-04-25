@@ -19,7 +19,20 @@ namespace Piranhas.Controllers
         // GET: Swimmers
         public ActionResult Index()
         {
-            return View(db.Swimmers.ToList());
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                return View(db.Swimmers.ToList().FindAll(sw => sw.UserID == userId));
+            }
+            else
+            {
+                return ForceLogin();
+            }
+        }
+
+        private ActionResult ForceLogin()
+        {
+            return RedirectToAction("Login", "Account");
         }
 
         // GET: Swimmers/Details/5
@@ -40,7 +53,14 @@ namespace Piranhas.Controllers
         // GET: Swimmers/Create
         public ActionResult Create()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return ForceLogin();
+            }
         }
 
         // POST: Swimmers/Create
