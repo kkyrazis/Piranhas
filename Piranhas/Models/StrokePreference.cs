@@ -12,5 +12,6 @@ namespace Piranhas.Models
         public bool Backstroke { get; set; }
         public bool Breaststroke { get; set; }
         public bool Freestyle { get; set; }
+        public bool IndividualMedley { get; set; }
     }
 }

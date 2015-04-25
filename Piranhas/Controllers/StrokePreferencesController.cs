@@ -15,8 +15,19 @@ namespace Piranhas.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            ViewBag.Swimmers = db.Swimmers.ToList().FindAll(sw => sw.UserID == userId);
-            return View();
+            var swimmers = db.Swimmers.ToList().FindAll(sw => sw.UserID == userId);
+            ViewBag.Swimmers = swimmers;
+            var strokePreferences = (from swim in swimmers
+                                     join pref in db.StrokePreferences
+                                     on swim.StrokePreferenceID equals pref.StrokePreferenceID
+                                     select pref).ToList();
+            var result = swimmers.Join(
+                db.StrokePreferences,
+                swim => swim.StrokePreferenceID,
+                pref => pref.StrokePreferenceID,
+                (swim, pref) => pref).ToList();
+
+            return View(result);
         }
     }
 }

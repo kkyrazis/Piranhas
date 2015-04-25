@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
+@model List<Piranhas.Models.StrokePreference>
 <h2>Index</h2>
 
 <script type="text/javascript">
@@ -22,17 +22,28 @@
     <ul class="nav nav-tabs">
         @for (int i = 0; i < ViewBag.Swimmers.Count; i++)
         {
-            <li @(i == 0 ? Html.Raw("class=\"active\""): Html.Raw(""))>
-           
-            <a data-toggle="tab" href="#section-@i">Section @i</a></li>
+            <li @(i == 0 ? Html.Raw("class=\"active\"") : Html.Raw(""))>
+
+                <a data-toggle="tab" href="#section-@i">@ViewBag.Swimmers[@i].FirstName @ViewBag.Swimmers[@i].LastName</a>
+            </li>
         }
     </ul>
-    
+
     <div class="tab-content">
-        @for(int i = 0; i < ViewBag.Swimmers.Count; i++) {
+        @for (int i = 0; i < ViewBag.Swimmers.Count; i++)
+        {
             <div id="section-@i" class="tab-pane fade in @(i == 0 ? Html.Raw("active") : Html.Raw(""))">
                 <h3>Section @i</h3>
-                <p>@ViewBag.Swimmers[@i].FirstName</p>
+                @Html.DisplayNameFor(model => model[0].Backstroke)
+                @Html.CheckBoxFor(model => model[@i].Backstroke)
+                @Html.DisplayNameFor(model => model[0].Butterfly)
+                @Html.CheckBoxFor(model => model[@i].Butterfly)
+                @Html.DisplayNameFor(model => model[0].Breaststroke)
+                @Html.CheckBoxFor(model => model[@i].Breaststroke)
+                @Html.DisplayNameFor(model => model[0].Freestyle)
+                @Html.CheckBoxFor(model => model[@i].Freestyle)
+                @Html.DisplayNameFor(model => model[0].IndividualMedley)
+                @Html.CheckBoxFor(model => model[@i].IndividualMedley)
             </div>
         }
     </div>
