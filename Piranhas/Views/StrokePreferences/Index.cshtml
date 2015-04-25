@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#myTab a").click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
+</script>
+<style type="text/css">
+    .bs-example {
+        margin: 20px;
+    }
+</style>
+
+<div class="bs-example">
+    <ul class="nav nav-tabs">
+        @for (int i = 0; i < ViewBag.Swimmers.Count; i++)
+        {
+            <li @(i == 0 ? Html.Raw("class=\"active\""): Html.Raw(""))>
+           
+            <a data-toggle="tab" href="#section-@i">Section @i</a></li>
+        }
+    </ul>
+    
+    <div class="tab-content">
+        @for(int i = 0; i < ViewBag.Swimmers.Count; i++) {
+            <div id="section-@i" class="tab-pane fade in @(i == 0 ? Html.Raw("active") : Html.Raw(""))">
+                <h3>Section @i</h3>
+                <p>@ViewBag.Swimmers[@i].FirstName</p>
+            </div>
+        }
+    </div>
+</div>
