@@ -27,6 +27,12 @@ namespace Piranhas.Controllers
                 pref => pref.StrokePreferenceID,
                 (swim, pref) => pref).ToList();
 
+            var result2 = swimmers.Join(
+                db.StrokePreferences,
+                swim => swim.StrokePreferenceID,
+                pref => pref.StrokePreferenceID,
+                (swim, pref) => new SwimmerViewModel(swim, pref)).ToList();
+
             return View(result);
         }
     }
