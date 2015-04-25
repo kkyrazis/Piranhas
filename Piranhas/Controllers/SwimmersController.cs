@@ -38,16 +38,28 @@ namespace Piranhas.Controllers
         // GET: Swimmers/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Swimmer swimmer = db.Swimmers.Find(id);
+                if (swimmer == null)
+                {
+                    return HttpNotFound();
+                }
+                if (swimmer.UserID != User.Identity.GetUserId())
+                {
+                    //TODO go somewhere else
+                    return RedirectToAction("Index", "Home");
+                }
+                return View(swimmer);
             }
-            Swimmer swimmer = db.Swimmers.Find(id);
-            if (swimmer == null)
+            else
             {
-                return HttpNotFound();
+                return ForceLogin();
             }
-            return View(swimmer);
         }
 
         // GET: Swimmers/Create
@@ -83,23 +95,39 @@ namespace Piranhas.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+                return View(swimmer);
             }
-            return View(swimmer);
+            else
+            {
+                return ForceLogin();
+            }
+
         }
 
         // GET: Swimmers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Swimmer swimmer = db.Swimmers.Find(id);
+                if (swimmer == null)
+                {
+                    return HttpNotFound();
+                }
+                if (swimmer.UserID != User.Identity.GetUserId())
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                return View(swimmer);
             }
-            Swimmer swimmer = db.Swimmers.Find(id);
-            if (swimmer == null)
+            else
             {
-                return HttpNotFound();
+                return ForceLogin();
             }
-            return View(swimmer);
         }
 
         // POST: Swimmers/Edit/5
@@ -121,16 +149,28 @@ namespace Piranhas.Controllers
         // GET: Swimmers/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Swimmer swimmer = db.Swimmers.Find(id);
+                if (swimmer == null)
+                {
+                    return HttpNotFound();
+                }
+                if (swimmer.UserID != User.Identity.GetUserId())
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                return View(swimmer);
             }
-            Swimmer swimmer = db.Swimmers.Find(id);
-            if (swimmer == null)
+            else
             {
-                return HttpNotFound();
+                return ForceLogin();
             }
-            return View(swimmer);
+
         }
 
         // POST: Swimmers/Delete/5
@@ -138,10 +178,22 @@ namespace Piranhas.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Swimmer swimmer = db.Swimmers.Find(id);
-            db.Swimmers.Remove(swimmer);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (User.Identity.IsAuthenticated)
+            {
+                Swimmer swimmer = db.Swimmers.Find(id);
+                if (swimmer.UserID != User.Identity.GetUserId())
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                db.Swimmers.Remove(swimmer);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                return ForceLogin();
+            }
         }
 
         protected override void Dispose(bool disposing)
