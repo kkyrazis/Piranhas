@@ -11,7 +11,7 @@ using Piranhas.Models;
 
 namespace Piranhas.Controllers
 {
-    public class SwimmersController : Controller
+    public class SwimmerController : Controller
     {
         private SwimmerContext db = new SwimmerContext();
         private ApplicationDbContext adb = new ApplicationDbContext();
@@ -137,13 +137,20 @@ namespace Piranhas.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SwimmerID,FirstName,LastName,Birthdate")] Swimmer swimmer)
         {
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated)
             {
-                db.Entry(swimmer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(swimmer).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(swimmer);
             }
-            return View(swimmer);
+            else
+            {
+                return ForceLogin();
+            }
         }
 
         // GET: Swimmers/Delete/5
@@ -185,7 +192,7 @@ namespace Piranhas.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                StrokePreference preference = db.StrokePreferences.Find(swimmer.StrokePreferenceID);
+                StrokePreference preference =  db.StrokePreferences.Find(swimmer.StrokePreferenceID);
                 db.StrokePreferences.Remove(preference);
                 db.Swimmers.Remove(swimmer);
                 db.SaveChanges();

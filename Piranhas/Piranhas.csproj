@@ -163,6 +163,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StrokePreferencesController.cs" />
     <Compile Include="Controllers\SwimmersController.cs" />
+    <Compile Include="fonts\SwimmersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,8 +184,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StrokePreference.cs" />
+    <Compile Include="Models\StrokePreferenceViewModel.cs" />
     <Compile Include="Models\Swimmer.cs" />
     <Compile Include="Models\SwimmerContext.cs" />
+    <Compile Include="Models\SwimmerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -250,6 +253,10 @@
     <Content Include="Views\Swimmers\Edit.cshtml" />
     <Content Include="Views\Swimmers\Index.cshtml" />
     <Content Include="Views\StrokePreferences\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StrokePreference.cshtml" />
+    <Content Include="Views\StrokePreferences\Edit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\StrokePreference.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StrokePreferenceViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

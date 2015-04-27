@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "StrokePreference";
+}
+@model Piranhas.Models.StrokePreference
+<h2>StrokePreference</h2>
+
+<div class="form-horizontal">
+    <h4>Stroke Preference</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Butterfly, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(modelItem => modelItem.Butterfly)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Backstroke, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(modelItem => modelItem.Backstroke)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Breaststroke, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(modelItem => modelItem.Breaststroke)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Freestyle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(modelItem => modelItem.Freestyle)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IndividualMedley, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(modelItem => modelItem.IndividualMedley)
+        </div>
+    </div>
+</div>

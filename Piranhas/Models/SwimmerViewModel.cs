@@ -7,12 +7,12 @@ namespace Piranhas.Models
 {
     public class SwimmerViewModel
     {
-        public SwimmerViewModel(Swimmer Swimmer, StrokePreference StrokePreference)
+        public SwimmerViewModel(Swimmer Swimmer, StrokePreferenceViewModel StrokePreferenceViewModel)
         {
             this.Swimmer = Swimmer;
-            this.StrokePreference = StrokePreference;
+            this.StrokePreferenceViewModel = StrokePreferenceViewModel;
         }
         public Swimmer Swimmer { get; set; }
-        public StrokePreference StrokePreference { get; set; }
+        public StrokePreferenceViewModel StrokePreferenceViewModel { get; set; }
     }
 }
