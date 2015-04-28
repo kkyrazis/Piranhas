@@ -11,5 +11,7 @@ namespace Piranhas.Models
         public SwimmerContext() : base("DefaultConnection") { }
         public DbSet<Swimmer> Swimmers { get; set; }
         public DbSet<StrokePreference> StrokePreferences { get; set; }
+        public DbSet<ArticleModel> Articles { get; set; }
+        public DbSet<FilePath> FilePaths { get; set; }
     }
 }

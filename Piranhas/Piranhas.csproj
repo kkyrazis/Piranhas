@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StrokePreferencesController.cs" />
@@ -179,8 +180,14 @@
     <Compile Include="Migrations\201504250411079_Swimmer preferences with IM.Designer.cs">
       <DependentUpon>201504250411079_Swimmer preferences with IM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504271900055_Articles.cs" />
+    <Compile Include="Migrations\201504271900055_Articles.Designer.cs">
+      <DependentUpon>201504271900055_Articles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ArticleModel.cs" />
+    <Compile Include="Models\FilePath.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StrokePreference.cs" />
@@ -257,9 +264,15 @@
     <Content Include="Views\StrokePreferences\Edit.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\StrokePreference.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StrokePreferenceViewModel.cshtml" />
+    <Content Include="Views\ArticleModels\Create.cshtml" />
+    <Content Include="Views\ArticleModels\Delete.cshtml" />
+    <Content Include="Views\ArticleModels\Details.cshtml" />
+    <Content Include="Views\ArticleModels\Edit.cshtml" />
+    <Content Include="Views\ArticleModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -277,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504250411079_Swimmer preferences with IM.resx">
       <DependentUpon>201504250411079_Swimmer preferences with IM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504271900055_Articles.resx">
+      <DependentUpon>201504271900055_Articles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
